@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Editor</title>
+</head>
+<body>
+    <style>
+        .radio-inputs {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          max-width: 350px;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+      
+        .radio-inputs > * {
+          margin: 6px;
+        }
+      
+        .instagram:checked + .radio-tile {
+          border: 2px solid black;
+        }
+      
+        .instagram:checked + .radio-tile:before {
+          transform: scale(1);
+          opacity: 1;
+          background-color: #F4F4F4;
+          border-color: #F4F4F4;
+        }
+      
+        .radio-tile .radio-icon {
+          width: 32px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .radio-icon img {
+          border-radius: 0.5rem;
+          width: 100%;
+        }
+      
+        .instagram:checked + .radio-tile .radio-label {
+          color: #F4F4F4;
+        }
+      
+        .instagram:focus + .radio-tile {
+          background-color: #F4F4F4;
+          border-color: #fff;
+        }
+        .instagram:checked + .radio-tile {
+          background-color: #F4F4F4;
+          border-color: #fff;
+        }
+      
+        .instagram:focus + .radio-tile:before {
+          transform: scale(1);
+          opacity: 1;
+        }
+      
+        .radio-tile {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          overflow: hidden;
+          min-height: 32px;
+          max-height: 32px;
+          border-radius: 0.5rem;
+          border: 2px solid #707070;
+          background-color: #fff;
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+          transition: 0.15s ease;
+          cursor: pointer;
+          position: relative;
+        }
+      
+        .instagram:hover {
+          border-color: #b9b9b9;
+        }
+        .radio-tile:hover:before {
+          transform: scale(1);
+          opacity: 1;
+        }
+      
+        .radio-icon svg {
+          width: 2rem;
+          height: 2rem;
+        }
+      
+        .radio-label {
+          color: #707070;
+          transition: 0.375s ease;
+          text-align: center;
+          font-size: 13px;
+        }
+      
+        .radio-input {
+          clip: rect(0 0 0 0);
+          -webkit-clip-path: inset(100%);
+          clip-path: inset(100%);
+          height: 1px;
+          overflow: hidden;
+          position: absolute;
+          white-space: nowrap;
+          width: 1px;
+        }
+        .radio-inputs label{
+          height: 32px;
+          width: 32px;
+        }
+        .txtPrvw{
+          background-color: #f4f4f4;
+          min-width: 70px;
+          min-height: 10px;
+        }
+        .textEditor{
+          display: none;
+        }
+      </style>
+    <div class="txtEditorSelect">
+        <p>Would You Like to add Text</p>
+        <div class="txtInpEdt">
+          <input id="txtEditNo" class="txtEditInp" type="radio" checked value="No" name="txtEditor">
+          <label id="txtEditNoL" for="txtEditNo">No</label>
+        </div>
+        <div class="txtInpEdt">
+          <input id="txtEditYes" class="txtEditInp" type="radio" value="Yes" name="txtEditor">
+          <label id="txtEditYesL" for="txtEditYes">Yes</label>
+        </div>
+      </div>
+      <div class="textEditor">
+        <div class="txtPrvw">
+          <span></span>
+        </div>
+        <p class="line-item-property__field">
+          <label for="your-name">Enter Your Text</label>
+          <input id="NameInp" value="" placeholder="Enter Name" type="text" name="properties[Your name]">
+        </p>
+        <p class="line-item-property__field">
+          <label for="your-name">Select your font:</label>
+          <div class="radio-inputs">
+            <label title="Block">
+              <input class="radio-input instagram" type="radio" value="Block" name="properties[font]">
+              <span class="radio-tile instagram">
+                <span class="radio-icon">
+                  <img
+                    src="https://customizery.s3.amazonaws.com/monaveen-london/5de9501c0c72b6d7aef96cd6f1bc6b05.png"
+                    alt=""
+                  >
+                </span>
+              </span>
+            </label>
+            <label title="Classic">
+              <input class="radio-input instagram" type="radio" value="Classic" name="properties[font]">
+              <span class="radio-tile instagram">
+                <span class="radio-icon">
+                  <img
+                    src="https://customizery.s3.amazonaws.com/monaveen-london/e5e0ab68f0da52e507213494feb450d5.png"
+                    alt=""
+                  >
+                </span>
+              </span>
+            </label>
+            <label title="Bubble Gum">
+              <input class="radio-input instagram" value="BubbleGum" type="radio" name="properties[font]">
+              <span class="radio-tile instagram">
+                <span class="radio-icon">
+                  <img
+                    src="https://customizery.s3.amazonaws.com/monaveen-london/06a5306a8266e347509376c845fa7d0d.png"
+                    alt=""
+                  >
+                </span>
+              </span>
+            </label>
+            <label title="Thin Script">
+              <input class="radio-input instagram" value="Thin Script" type="radio" name="properties[font]">
+              <span class="radio-tile instagram">
+                <span class="radio-icon">
+                  <img
+                    src="https://customizery.s3.amazonaws.com/monaveen-london/53d67dd8ec32dd18b9ea5a9a553f595a.png"
+                    alt=""
+                  >
+                </span>
+              </span>
+            </label>
+            <label title="Script">
+              <input class="radio-input instagram" value="Script" type="radio" name="properties[font]">
+              <span class="radio-tile instagram">
+                <span class="radio-icon">
+                  <img
+                    src="https://customizery.s3.amazonaws.com/monaveen-london/b0e654ed9c5d0548a42d9af214d10ef4.png"
+                    alt=""
+                  >
+                </span>
+              </span>
+            </label>
+          </div>
+        </p>
+      </div>
+    <script>
+const editorDiv = document.querySelector('.textEditor')
+const editOpt = document.querySelectorAll('.txtEditInp')
+const editClose = document.getElementById('txtEditNo')
+const editOpen = document.getElementById('txtEditYes')
+const textChanger = document.getElementById('NameInp')
+const txtPrvwDiv = document.querySelector('.txtPrvw span')
+const fontChanger = document.querySelectorAll('.radio-inputs label input')
+
+window.addEventListener('load',()=>{
+  editOpen.checked = false
+  editClose.checked = true
+    txtPrvwDiv.innerText = ''
+    textChanger.value = ''
+    fontChanger.forEach(btn => {
+      btn.checked = false
+    })
+})
+
+editOpt.forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (editOpen.checked) {
+      editorDiv.style.display = "block"
+    } else {
+      editorDiv.style.display = "none"
+    }
+
+  })
+})
+editClose.addEventListener('click',()=>{
+    txtPrvwDiv.innerText = ''
+    textChanger.value = ''
+    fontChanger.forEach(btn => {
+      btn.checked = false
+    })
+})
+      textChanger.addEventListener('input',(e)=>{
+    txtPrvwDiv.innerText = e.target.value
+})
+      
+ fontChanger.forEach(btn => {
+    btn.addEventListener('click',()=>{
+        if (btn.value == 'Block') txtPrvwDiv.style.fontFamily = "cursive"
+        if (btn.value == 'Classic') txtPrvwDiv.style.fontFamily = "fantasy"
+        if (btn.value == 'BubbleGum') txtPrvwDiv.style.fontFamily = "monospace"
+        if (btn.value == 'Thin Script') txtPrvwDiv.style.fontFamily = "serif"
+        if (btn.value == 'Script') txtPrvwDiv.style.fontFamily = "system-ui"
+    })
+})
+    </script>
+</body>
+</html>
