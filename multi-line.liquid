@@ -1,0 +1,109 @@
+<style>
+  /* multi line text */
+  .mlt-selector{
+    width: 100%;
+    height: 50px;
+    margin: 10px 0px;
+  }
+  .inputCont {
+    padding-bottom: 10px;
+  }
+  .inputCont > input {
+    width: 100%;
+    height: 50px;
+  }
+  .inpHead{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  /* multi line text */
+</style>
+
+
+<!-- multi line item properties -->       
+        <div class="multi-line-Cont">
+          <div class="multi-line-head">
+            <label for="mlts">{{ selector-heading }}</label>
+            <select id="mlts" class="mlt-selector">
+              {% for i in (1..selector-options) %}
+              <option value="{{ i }}">{{ i }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div id="inputDiv" class="multi-line-inputs">
+            
+          </div>
+        </div>
+<!-- multi line item properties -->
+
+{%- render 'buy-buttons',
+                  block: block,
+                  product: product,
+                  product_form_id: product_form_id,
+                  section_id: section.id,
+                  show_pickup_availability: true,
+                  selector-heading: section.settings.selector_head,
+                  selector-options: section.settings.selector_inp
+                -%}
+
+<!-- multi-line value script -->
+    <script>
+const inputDiv = document.getElementById('inputDiv')
+const inputSelector = document.getElementById('mlts')
+      
+function counterChanger(){
+  const InputChange = document.querySelectorAll('.ringValue')
+const counter = document.querySelectorAll('.counter')
+    setTimeout(() => {
+    InputChange.forEach((e, index) => {
+      e.addEventListener('input',data=>{
+        counter[index].innerText = data.target.value.length + '/' + data.target.maxLength
+      })
+  }, 500)
+})
+}
+
+inputSelector.addEventListener('change', (j) => {
+  inputDiv.innerHTML = null
+  for (let i = 1; i <= j.target.value; i++) {
+    inputDiv.innerHTML += `<div class="inputCont">
+              <div class="inpHead">
+              <label for="inp${i}">{{ section.settings.Inp_head }} ${i}</label>
+              <span class="counter" id="wordsCounter${i}">0/10</span>
+              </div>
+              <input type="text" maxlength="10" id="inp${i}" class="ringValue" name="properties[{{ section.settings.Inp_head }} value ${i}]">
+            </div>`
+  }
+counterChanger()
+})
+    </script>
+<!-- multi-line value script -->
+
+
+
+{% schema %}
+{
+      "type": "header",
+      "content": "multi Line Input Settings"
+    },
+    {
+      "type": "text",
+      "id": "selector_head",
+      "label": "Heading for Selector"
+    },
+    {
+      "type": "range",
+      "id": "selector_inp",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Input Selector",
+      "default": 6
+    },
+    {
+      "type": "text",
+      "id": "Inp_head",
+      "label": "Input Heading"
+    }
+{% endschema %}
