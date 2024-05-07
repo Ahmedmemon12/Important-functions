@@ -1,0 +1,171 @@
+<style>
+  .unCollapsed-Renderer{
+    display: none;
+  }
+  #CloseBtn{
+    display: none;
+  }
+  .b-utton {
+ display: inline-block;
+ border-radius: 7px;
+ border: none;
+ background: #1875FF;
+ color: white;
+ font-family: inherit;
+ text-align: center;
+ font-size: 13px;
+ box-shadow: 0px 0px 20px -11px #1875FF;
+ width: 10em;
+ padding: 1em;
+ transition: all 0.4s;
+ cursor: pointer;
+}
+
+.b-utton span {
+ cursor: pointer;
+ display: inline-block;
+ position: relative;
+ transition: 0.4s;
+}
+
+.b-utton span:after {
+ content: 'MORE...';
+ position: absolute;
+ opacity: 0;
+ top: 0;
+ right: -20px;
+ transition: 0.7s;
+}
+.B-utton span:after {
+ content: 'LESS...';
+ position: absolute;
+ opacity: 0;
+ top: 0;
+ right: -20px;
+ transition: 0.7s;
+}
+
+.b-utton:hover span {
+ padding-right: 3em;
+}
+.b-utton::after {
+  border: none !important;
+  box-shadow: none !important;
+}
+.b-utton:hover span:after {
+ opacity: 4;
+ right: 0;
+}
+  .description{
+    font-size: {{ descFontSize }}px;
+    font-weight: {{ descFontWeight }};
+    color: {{ descFontColor }};
+  }
+</style>
+
+<div class="descriptionContainer">
+  <div id="collapsedDesc" class="collapsed-Renderer description">
+    
+  </div>
+  <div id="fullDesc" class="unCollapsed-Renderer description">
+    
+  </div>
+  <button id="OpenerBtn" class="b-utton" style="vertical-align:middle"><span>READ</span></button>
+  <button id="CloseBtn" class="B-utton b-utton" style="vertical-align:middle"><span>READ</span></button>
+</div>
+
+<script>
+  const description = "{{ description }}"
+  const closedDiv = document.getElementById('collapsedDesc')
+  const OpenedDiv = document.getElementById('fullDesc')
+  const openCollapse = document.getElementById('OpenerBtn')
+  const closeCollapse = document.getElementById('CloseBtn')
+  const descArray = description.split(' ').splice(0, {{ collapserWords }}).join(' ')
+  
+  window.addEventListener('DOMContentLoaded',()=>{
+    if(!description){
+        document.querySelector('.descriptionContainer').style.display = "none"
+    }
+  })
+  
+  closedDiv.innerText = descArray
+  OpenedDiv.innerText = description
+  
+  openCollapse.addEventListener('click',()=>{
+    closedDiv.style.display = "none"
+    OpenedDiv.style.display = "block"
+    openCollapse.style.display = "none"
+    closeCollapse.style.display = "block"
+  })
+  closeCollapse.addEventListener('click',()=>{
+    closedDiv.style.display = "block"
+    OpenedDiv.style.display = "none"
+    openCollapse.style.display = "block"
+    closeCollapse.style.display = "none"
+})
+
+  
+</script>
+
+
+{% comment %} render from product page {% endcomment %}
+{% when "dynamic-desc" %}
+                  {% render 'custom-description',
+                    description: block.settings.customDescription,
+                    collapserWords: block.settings.collapsible,
+                    descFontSize: block.settings.desc_font_size,
+                    descFontWeight: block.settings.desc_font_weight,
+                    descFontColor: block.settings.desc_font_color
+                  %}
+
+
+{% schema %}
+
+{
+      "type": "dynamic-desc",
+      "name": "Custom Description",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "customDescription",
+          "label": "Enter Description"
+        },
+        {
+          "type": "range",
+          "id": "collapsible",
+          "min": 10,
+          "max": 25,
+          "step": 1,
+          "label": "Break Points",
+          "default": 10
+        },
+        {
+          "type": "range",
+          "id": "desc_font_size",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "label": "Font size",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "desc_font_weight",
+          "min": 100,
+          "max": 900,
+          "step": 100,
+          "label": "Font Weight",
+          "default": 100
+        },
+        {
+          "type": "color",
+          "id": "desc_font_color",
+          "label": "Font Color",
+          "default": "#000"
+        }
+      ]
+    }
+
+{% endschema %}
+{% comment %} render from product page {% endcomment %}
