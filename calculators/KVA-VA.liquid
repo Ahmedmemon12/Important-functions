@@ -1,0 +1,264 @@
+<style>
+  .calculatorCont{
+    position: relative;
+    background-color: #00ffff38;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: monospace;
+  }
+  .calculatorCont > h1{
+    font-size: 70px;
+    font-weight: 900;
+    transform: rotate(12deg);
+    color: black;
+    text-shadow: 2px 2px 20px black;
+    text-transform: uppercase;
+  }
+  .calculator{
+    position: absolute;
+    width: 50%;
+    max-width: 465px;
+    border-radius: 10px;
+    padding: 20px;
+    background: rgba(204, 204, 204, 0.58);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(204, 204, 204, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .calculatorHead{
+    font-size: 30px;   
+    font-weight: 700;
+    font-family: system-ui;
+  }
+  .dataInp, .dataRes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 5px;
+    font-size: 18px;
+    font-weight: 900;
+  }
+  .resultCont{
+    padding:0px 10px;
+  }
+  input.input:focus-visible {
+    box-shadow: none;
+    border: none;
+    outline: none;
+  }
+  .resultCont{
+    display: block !important;
+    border: none;
+    background-color: #ffffff;
+    border: 1px solid blue;
+    border-radius: 4px;
+    transition: 1s;
+    width: max-content;
+    min-height: 20px;
+  }
+  .group {
+ position: relative;
+}
+
+.input {
+ font-size: 16px;
+ padding: 10px 10px 10px 5px;
+ display: block;
+ width: 200px;
+ border: none;
+ border-bottom: 1px solid #515151;
+ background: #ffffff6b;
+}
+
+.input:focus {
+ outline: none;
+}
+.parentLabel{
+  position: unset !important;
+  font-weight: 900;
+}
+label {
+ color: #000;
+ font-size: 18px;
+ font-weight: normal;
+ position: absolute;
+ pointer-events: none;
+ left: 5px;
+ top: 5px;
+ transition: 0.2s ease all;
+ -moz-transition: 0.2s ease all;
+ -webkit-transition: 0.2s ease all;
+}
+
+.input:focus ~ label, .input:valid ~ label {
+ left: 80%;
+ font-size: 14px;
+ color: #000;
+}
+
+.bar {
+ position: relative;
+ display: block;
+ width: 200px;
+}
+
+.bar:before, .bar:after {
+ content: '';
+ height: 2px;
+ width: 0;
+ bottom: 1px;
+ position: absolute;
+ background: #5264AE;
+ transition: 0.2s ease all;
+ -moz-transition: 0.2s ease all;
+ -webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+ left: 50%;
+}
+
+.bar:after {
+ right: 50%;
+}
+
+.input:focus ~ .bar:before, .input:focus ~ .bar:after {
+ width: 50%;
+}
+
+.highlight {
+ position: absolute;
+ height: 60%;
+ width: 100px;
+ top: 25%;
+ left: 0;
+ pointer-events: none;
+ opacity: 0.5;
+}
+
+.input:focus ~ .highlight {
+ animation: inputHighlighter 0.3s ease;
+}
+
+@keyframes inputHighlighter {
+ from {
+  background: #5264AE;
+ }
+
+ to {
+  width: 0;
+  background: transparent;
+ }
+}
+  .Links {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .menu-link > a {
+    color: black;
+    text-decoration: none;
+  }
+</style>
+<div class="Links">
+  <div class="menu">
+  {% for link in section.settings.menuNav.links %}
+    <div class="menu-link">
+      <a href="{{ link.url }}">{{ link.title }}</a>
+    </div>
+  {% endfor %}
+</div>
+</div>
+<div class="calculatorCont">
+  <h1>KVA TO VA Converter</h1>
+  <div class="calculator">
+    <span class="calculatorHead">Calculator</span>
+    <div class="dataInp">
+      <label class="parentLabel" for="valueInp">
+        Enter kilovolt-amps:
+      </label>
+    <div class="group">
+      <input required="" type="text" id="valueInp" class="input">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>KVA</label>
+    </div>
+    </div>
+    <div class="Calculator-Btn">
+    <button class="button btn" id="calculateBtn">Calculate</button>
+      <button  class="button btn" id="resetBtn">Reset</button>
+    </div>
+    <div class="dataRes">
+      <span>
+        Results in volt-amps:
+      </span>
+      <div class="resultCont" id="valueRes">
+        <b></b>
+      <span>VA</span>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  const valueEntered = valueInp
+  const valueResult = document.querySelector('#valueRes b')
+  const CalculateBtn = calculateBtn
+  const resetButton = resetBtn
+  let calculatedRes = ""
+
+  function calculate(value){
+    calculatedRes = value * 1000
+     return calculatedRes
+  }
+  function ShowRes(){
+    valueResult.innerText = calculatedRes
+     return 
+  }
+  CalculateBtn.addEventListener('click', ShowRes)
+  valueEntered.addEventListener('input',data=>{
+      calculate(Number(data.target.value))
+  })
+  resetButton.addEventListener('click',()=>{
+    valueEntered.value = null
+    valueResult.innerText = ''
+    calculatedRes = ""
+  })
+</script>
+{% schema %}
+  {
+    "name": "kVA-to-VA-calculator",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Navigation Links Settings"
+      },
+      {
+        "type": "link_list",
+        "id": "menuNav",
+        "label": "Enter The Menu Links"
+      }
+    ],
+    "presets": [
+      {
+        "name": "KVA-converter"
+      }
+    ]
+  }
+{% endschema %}

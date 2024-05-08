@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .calculatorCont {
+    position: relative;
+    background-color: #00ffff38;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: monospace;
+  }
+
+  .calculatorCont>h1 {
+    font-size: 60px;
+    font-weight: 900;
+    transform: rotate(12deg);
+    color: black;
+    text-shadow: 2px 2px 20px black;
+    text-transform: uppercase;
+  }
+
+  .calculator {
+    position: absolute;
+    width: 50%;
+    max-width: 465px;
+    border-radius: 10px;
+    padding: 20px;
+    background: rgba(204, 204, 204, 0.58);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(204, 204, 204, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .calculatorHead {
+    font-size: 30px;
+    font-weight: 700;
+    font-family: system-ui;
+  }
+
+  .dataInp,
+  .dataRes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    gap: 5px;
+    font-size: 18px;
+    font-weight: 900;
+  }
+
+  .resultCont {
+    padding: 0px 10px;
+  }
+
+  input.input:focus-visible {
+    box-shadow: none;
+    border: none;
+    outline: none;
+  }
+
+  .resultCont {
+    display: block !important;
+    border: none;
+    background-color: #ffffff;
+    border: 1px solid blue;
+    border-radius: 4px;
+    transition: 1s;
+    width: max-content;
+    min-height: 20px;
+  }
+
+  .group {
+    position: relative;
+  }
+
+  .input {
+    font-size: 16px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 200px;
+    border: none;
+    border-bottom: 1px solid #515151;
+    background: #ffffff6b;
+  }
+
+  .input:focus {
+    outline: none;
+  }
+
+  .parentLabel {
+    position: unset !important;
+    font-weight: 900;
+  }
+
+  label {
+    color: #000;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 5px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+
+  .input:focus~label,
+  .input:valid~label {
+    left: 80%;
+    font-size: 14px;
+    color: #000;
+  }
+
+  .bar {
+    position: relative;
+    display: block;
+    width: 200px;
+  }
+
+  .bar:before,
+  .bar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #5264AE;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+
+  .bar:before {
+    left: 50%;
+  }
+
+  .bar:after {
+    right: 50%;
+  }
+
+  .input:focus~.bar:before,
+  .input:focus~.bar:after {
+    width: 50%;
+  }
+
+  .highlight {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .input:focus~.highlight {
+    animation: inputHighlighter 0.3s ease;
+  }
+
+  @keyframes inputHighlighter {
+    from {
+      background: #5264AE;
+    }
+
+    to {
+      width: 0;
+      background: transparent;
+    }
+  }
+
+  .Links {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .menu-link>a {
+    color: black;
+    text-decoration: none;
+  }
+
+  .inpWrapper {
+    display: flex;
+  }
+
+  .inpWrapper>select {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-left: 1px solid #515151;
+    border-bottom: 1px solid #515151;
+    background-color: #ffffff6b;
+    padding: 3px;
+  }
+
+  select#typeSelector {
+    width: 63%;
+    height: 40px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-bottom: 1px solid #515151;
+    background-color: #ffffff6b;
+  }
+
+  select#VoltTypeSelector {
+    width: 63%;
+    height: 40px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-bottom: 1px solid #515151;
+    background-color: #ffffff6b;
+  }
+
+  option {
+    background-color: #ccc;
+    font-weight: 600;
+    color: black;
+  }
+
+  #voltSelectorCont {
+    display: none;
+  }
+
+  #powerSelectorCont {
+    display: none;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+</style>
+
+<body>
+  <div class="Links">
+    <div class="menu">
+      {% for link in section.settings.menuNav.links %}
+      <div class="menu-link">
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="calculatorCont">
+    <h1>Amps to Kilowatts Converter</h1>
+    <div class="calculator">
+      <span class="calculatorHead">Calculator</span>
+      <div class="dataInp">
+        <label class="parentLabel" for="valueInp">
+          Current type
+        </label>
+        <select name="" id="typeSelector">
+          <option value="dc">DC</option>
+          <option value="ac_1">AC - Single phase</option>
+          <option value="ac_3">AC - Three phase</option>
+        </select>
+      </div>
+      <div class="dataInp">
+        <label class="parentLabel" for="valueInp">
+          Current (amps)
+        </label>
+        <div class="inpWrapper">
+          <div class="group">
+            <input required="" type="number" min="1" id="ampInp" class="input">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>AMPs</label>
+          </div>
+          <select name="" id="ampSelector">
+            <option value="milliamp">mA</option>
+            <option value="amp" selected>A</option>
+            <option value="kiloamp">kA</option>
+          </select>
+        </div>
+      </div>
+      <div id="voltSelectorCont" class="dataInp">
+        <label class="parentLabel" for="valueInp">
+          Voltage type
+        </label>
+        <select name="" id="VoltTypeSelector">
+          <option value="ltl_v">Line to line voltage</option>
+          <option value="ltn_v">Line to neutral voltage</option>
+        </select>
+      </div>
+      <div class="dataInp">
+        <label class="parentLabel" for="valueInp">
+          Voltage (volts)
+        </label>
+        <div class="inpWrapper">
+          <div class="group">
+            <input required="" type="number" min="1" id="voltInp" class="input">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>VOLTs</label>
+          </div>
+          <select name="" id="voltSelector">
+            <option value="millivolt">mV</option>
+            <option value="volt" selected>V</option>
+            <option value="kilovolt">kV</option>
+          </select>
+        </div>
+      </div>
+      <div id="powerSelectorCont" class="dataInp">
+        <label class="parentLabel" for="valueInp">
+          Power factor (≤1)
+        </label>
+        <div class="group">
+          <input required="" type="number" min="0" max="1" id="powerInp" class="input">
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label></label>
+        </div>
+      </div>
+      <div class="Calculator-Btn">
+        <button class="button btn" id="calculateBtn">Calculate</button>
+        <button class="button btn" id="resetBtn">Reset</button>
+        <button class="button btn" id="SwapBtn">Swap</button>
+      </div>
+      <div class="dataRes">
+        <span>
+          Power (kilowatts)
+        </span>
+        <div class="resultCont" id="kiloResCont">
+          <b></b>
+          <span>kW</span>
+        </div>
+      </div>
+      <div class="dataRes">
+        <span>
+          Power (watts)
+        </span>
+        <div class="resultCont" id="normalResCont">
+          <b></b>
+          <span>W</span>
+        </div>
+      </div>
+      <div class="dataRes">
+        <span>
+          Power (milliwatts)
+        </span>
+        <div class="resultCont" id="milliResCont">
+          <b></b>
+          <span>mW</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const ampEntered = ampInp
+    const voltEntered = voltInp
+    const typeSelect = typeSelector
+    const voltTypeSelect = voltSelectorCont
+    const powerInp = powerSelectorCont
+    const ampValue = ampSelector
+    const voltValue = voltSelector
+    const calculateBtn = document.getElementById('calculateBtn')
+    const resetBtn = document.getElementById('resetBtn')
+    const mResDiv = document.querySelector('#milliResCont b')
+    const nResDiv = document.querySelector('#normalResCont b')
+    const kResDiv = document.querySelector('#kiloResCont b')
+
+    typeSelect.addEventListener('change', () => {
+      if (typeSelect.value == 'ac_1') {
+        powerInp.style.display = "flex"
+      }
+      else if (typeSelect.value == 'ac_3') {
+        powerInp.style.display = "flex"
+        voltTypeSelect.style.display = "flex"
+      }
+      else {
+        powerInp.style.display = "none"
+        voltTypeSelect.style.display = "none"
+      }
+    })
+
+    resetBtn.addEventListener('click',()=>{
+      kResDiv.innerText = ''
+      nResDiv.innerText = ''
+      mResDiv.innerText = ''
+      ampEntered.value = ''
+      voltEntered.value = ''
+      typeSelect.value = 'dc'
+      powerInp.style.display = 'none'
+      voltTypeSelect.style.display = 'none'
+      
+    })
+
+    function dcFunc(i, v) {
+      if (ampValue.value == "amp" && voltValue.value == "millivolt" || ampValue.value == "milliamp" && voltValue.value == "volt") {
+
+        const results = {
+          kiloRes: Math.round((i * v / 1000) / 1000 * 10000000) / 10000000,
+          normalRes: i * v / 1000,
+          milliRes: i * v
+        }
+
+        return results
+      }
+      if (ampValue.value == "amp" && voltValue.value == "volt" || ampValue.value == "milliamp" && voltValue.value == "kilovolt" || ampValue.value == "kiloamp" && voltValue.value == "millivolt") {
+        const results = {
+          kiloRes: i * v / 1000,
+          normalRes: i * v,
+          milliRes: i * v * 1000
+        }
+        return results
+      }
+      if (ampValue.value == "amp" && voltValue.value == "kilovolt" || ampValue.value == "kiloamp" && voltValue.value == "volt") {
+        const results = {
+          kiloRes: i * v / 1000 * 1000,
+          normalRes: i * v * 1000,
+          milliRes: i * v * 1000 * 1000
+        }
+        return results
+      }
+      if (ampValue.value == "milliamp" && voltValue.value == "millivolt") {
+        const results = {
+          kiloRes: (((i * v / 1000) / 1000) / 1000).toFixed(9),
+          normalRes: parseFloat(((i * v / 1000) / 1000).toFixed(8)),
+          milliRes: parseFloat((i * v / 1000).toFixed(5))
+        }
+        return results
+      }
+      if (ampValue.value == "kiloamp" && voltValue.value == "kilovolt") {
+        const results = {
+          kiloRes: ((i * v * 1000) * 1000)/1000,
+          normalRes: (i * v * 1000) * 1000,
+          milliRes: ((i * v * 1000) * 1000)*1000
+        }
+        return results
+      }
+    }
+
+    calculateBtn.addEventListener('click', () => {
+      const result = dcFunc(ampEntered.value, voltEntered.value)
+      kResDiv.innerText = result.kiloRes
+      nResDiv.innerText =  result.normalRes
+      mResDiv.innerText = result.milliRes
+    })
+  </script>
+</body>
+
+</html>
