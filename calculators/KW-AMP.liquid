@@ -1,7 +1,36 @@
+<!-- Section File Name: Kilowatts-Amps.liquid -->
+<!-- Section Name: Kilowatts-to-Amps -->
+<!-- Presets Name: kiloWatt-converter -->
+
 <style>
+  #sid-{{section.id}} .main_container{
+    width: 100%;
+    position: relative;
+    background-color: {{section.settings.bg_color}};
+  }
+  #sid-{{section.id}} .content_wrapper{
+    {% if section.settings.full_width == false %}
+      max-width: {{section.settings.maxWidth}}px;
+    {% endif %}
+    width: 100%;
+    margin: 0 auto;
+    padding: {{ section.settings.padding_top }}px {{ section.settings.padding_right }}px {{ section.settings.padding_bottom }}px {{ section.settings.padding_left }}px;
+  }
+  #sid-{{section.id}} {
+
+  }
+
+  @media only screen and (max-width: 767px){
+    #sid-{{section.id}} .content_wrapper{
+      padding: {{ section.settings.padding_top_mb }}px {{ section.settings.padding_right_mb }}px {{ section.settings.padding_bottom_mb }}px {{ section.settings.padding_left_mb }}px;
+    }
+    #sid-{{section.id}} .main_container{
+
+    }
+  }
   .calculatorCont {
     position: relative;
-    background-color: #00ffff38;
+    background-color: {{ section.settings.bg-color }};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,11 +53,11 @@
     max-width: 465px;
     border-radius: 10px;
     padding: 20px;
-    background: rgba(204, 204, 204, 0.58);
+    background: {{ section.settings.calc-bg-color }}{{ section.settings.bg_opacity }};
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur({{ section.settings.bg_blur }}px);
+    -webkit-backdrop-filter: blur({{ section.settings.bg_blur }}px);
     border: 1px solid rgba(204, 204, 204, 1);
     display: flex;
     align-items: center;
@@ -182,7 +211,7 @@
     justify-content: center;
   }
 
-    .Menu {
+  .Menu {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -248,19 +277,22 @@
     margin: 0;
   }
 </style>
-    <div class="Links">
-    <div class="Menu">
-      {% for link in section.settings.menuNav.links %}
-      <div class="Menu-link">
-        <a href="{{ link.url }}">{{ link.title }}</a>
+<div id="sid-{{ section.id }}">
+  <div class="main_container">
+    <div class="content_wrapper">
+      <div class="Links">
+        <div class="Menu">
+          {% for link in section.settings.menuNav.links %}
+          <div class="Menu-link">
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </div>
+          {% endfor %}
+        </div>
       </div>
-      {% endfor %}
-    </div>
-  </div>
-  <div class="calculatorCont">
-    <h1>Amps to Kilowatts Converter</h1>
+      <div class="calculatorCont">
+    <h1>Kilowatts to Amps Calculator</h1>
     <div class="calculator">
-      <span class="calculatorHead">Calculator</span>
+      <span class="calculatorHead">{{ section.settings.Calculator-title }}</span>
       <div class="dataInp">
         <label class="parentLabel" for="valueInp">
           Current type
@@ -273,19 +305,19 @@
       </div>
       <div class="dataInp">
         <label class="parentLabel" for="valueInp">
-          Current (amps)
+          Power (KW)
         </label>
         <div class="inpWrapper">
           <div class="group">
-            <input required="" type="number" min="1" id="ampInp" class="input">
+            <input required="" type="number" min="1" id="wattInp" class="input">
             <span class="highlight"></span>
             <span class="bar"></span>
-            <label>AMPs</label>
+            <label>WATTs</label>
           </div>
-          <select name="" id="ampSelector">
-            <option value="milliamp">mA</option>
-            <option value="amp" selected>A</option>
-            <option value="kiloamp">kA</option>
+          <select name="" id="wattSelect">
+            <option value="milliWatts">mW</option>
+            <option value="watts">W</option>
+            <option value="kiloWatts" selected>kW</option>
           </select>
         </div>
       </div>
@@ -330,52 +362,45 @@
       <div class="Calculator-Btn">
         <button class="button btn" id="calculateBtn">Calculate</button>
         <button class="button btn" id="resetBtn">Reset</button>
-        <a href="https://aleena-practice.myshopify.com/pages/kilowatts-to-amps-calculator"><button class="button btn" id="SwapBtn">Swap</button></a>
+        <a href="https://aleena-practice.myshopify.com/pages/amps-to-kilowatts-calculator"><button class="button btn" id="SwapBtn">Swap</button></a>
       </div>
       <div class="dataRes">
         <span>
-          Power (kilowatts)
-        </span>
-        <div class="resultCont" id="kiloResCont">
-          <b></b>
-          <span>kW</span>
-        </div>
-      </div>
-      <div class="dataRes">
-        <span>
-          Power (watts)
+          Current (amps)
         </span>
         <div class="resultCont" id="normalResCont">
           <b></b>
-          <span>W</span>
+          <span>A</span>
         </div>
       </div>
       <div class="dataRes">
         <span>
-          Power (milliwatts)
+          Current (milliamps)
         </span>
         <div class="resultCont" id="milliResCont">
           <b></b>
-          <span>mW</span>
+          <span>mA</span>
         </div>
       </div>
     </div>
   </div>
-  <script>
-    const ampEntered = ampInp
+    </div>
+  </div>
+</div>
+    <script>
+    const wattEntered = wattInp
     const voltEntered = voltInp
     const typeSelect = typeSelector
     const voltTypeSelect = voltSelectorCont
     const voltTypeSelectorDrop = VoltTypeSelector
     const powerInp = powerSelectorCont
-    const ampValue = ampSelector
+    const wattValue = wattSelect
     const voltValue = voltSelector
     const powerValue = document.getElementById('powerInp')
     const calculateBtn = document.getElementById('calculateBtn')
     const resetBtn = document.getElementById('resetBtn')
     const mResDiv = document.querySelector('#milliResCont b')
     const nResDiv = document.querySelector('#normalResCont b')
-    const kResDiv = document.querySelector('#kiloResCont b')
 
     typeSelect.addEventListener('change', () => {
       if (typeSelect.value == 'ac_1') {
@@ -393,10 +418,9 @@
     })
 
     resetBtn.addEventListener('click', () => {
-      kResDiv.innerText = ''
       nResDiv.innerText = ''
       mResDiv.innerText = ''
-      ampEntered.value = ''
+      wattEntered.value = ''
       voltEntered.value = ''
       typeSelect.value = 'dc'
       powerInp.style.display = 'none'
@@ -405,45 +429,40 @@
     })
 
     function dcFunc(i, v) {
-      if (ampValue.value == "amp" && voltValue.value == "millivolt" || ampValue.value == "milliamp" && voltValue.value == "volt") {
+      if (wattValue.value == "milliWatts" && voltValue.value == "millivolt" || wattValue.value == "watts" && voltValue.value == "volt" || wattValue.value == "kiloWatts" && voltValue.value == "kilovolt") {
 
         const results = {
-          kiloRes: Math.round((i * v / 1000) / 1000 * 10000000) / 10000000,
-          normalRes: i * v / 1000,
-          milliRes: i * v
+          normalRes: i / v,
+          milliRes: i / v * 1000
         }
 
         return results
       }
-      if (ampValue.value == "amp" && voltValue.value == "volt" || ampValue.value == "milliamp" && voltValue.value == "kilovolt" || ampValue.value == "kiloamp" && voltValue.value == "millivolt") {
+      if (wattValue.value == "watts" && voltValue.value == "millivolt" || wattValue.value == "kiloWatts" && voltValue.value == "volt") {
         const results = {
-          kiloRes: i * v / 1000,
-          normalRes: i * v,
-          milliRes: i * v * 1000
+          normalRes: i / v * 1000,
+          milliRes: 1000 * i / v * 1000
         }
         return results
       }
-      if (ampValue.value == "amp" && voltValue.value == "kilovolt" || ampValue.value == "kiloamp" && voltValue.value == "volt") {
+      if (wattValue.value == "milliWatts" && voltValue.value == "volt" || wattValue.value == "watts" && voltValue.value == "kilovolt") {
         const results = {
-          kiloRes: i * v / 1000 * 1000,
-          normalRes: i * v * 1000,
-          milliRes: i * v * 1000 * 1000
+          normalRes: i / v / 1000,
+          milliRes: i / v
         }
         return results
       }
-      if (ampValue.value == "milliamp" && voltValue.value == "millivolt") {
+      if (wattValue.value == "kiloWatts" && voltValue.value == "millivolt") {
         const results = {
-          kiloRes: (((i * v / 1000) / 1000) / 1000).toFixed(9),
-          normalRes: parseFloat(((i * v / 1000) / 1000).toFixed(8)),
-          milliRes: parseFloat((i * v / 1000).toFixed(5))
+          normalRes: (i / v * 1000) * 1000,
+          milliRes: ((i / v * 1000) * 1000) * 1000
         }
         return results
       }
-      if (ampValue.value == "kiloamp" && voltValue.value == "kilovolt") {
+      if (wattValue.value == "milliWatts" && voltValue.value == "kilovolt") {
         const results = {
-          kiloRes: ((i * v * 1000) * 1000) / 1000,
-          normalRes: (i * v * 1000) * 1000,
-          milliRes: ((i * v * 1000) * 1000) * 1000
+          normalRes: ((i / v / 1000) / 1000).toFixed(7),
+          milliRes: ((i / v / 1000))
         }
         return results
       }
@@ -451,43 +470,40 @@
 
     function acSingle(i, v, p) {
       if (p >= 0 || p <= 1) {
-        if (ampValue.value == "milliamp" && voltValue.value == "kilovolt" || ampValue.value == "amp" && voltValue.value == "volt" || ampValue.value == "kiloamp" && voltValue.value == "millivolt") {
+        if (wattValue.value == "milliWatts" && voltValue.value == "millivolt" || wattValue.value == "watts" && voltValue.value == "volt" || wattValue.value == "kiloWatts" && voltValue.value == "kilovolt") {
+
           const results = {
-            kiloRes: (p * i * v / 1000),
-            normalRes: p * i * v,
-            milliRes: p * i * v * 1000
+            normalRes: i / (p * v),
+            milliRes: i / (p * v) * 1000
+          }
+
+          return results
+        }
+        if (wattValue.value == "watts" && voltValue.value == "millivolt" || wattValue.value == "kiloWatts" && voltValue.value == "volt") {
+          const results = {
+            normalRes: i / (p * v) * 1000,
+            milliRes: 1000 * i / (p * v) * 1000
           }
           return results
         }
-        if (ampValue.value == "amp" && voltValue.value == "millivolt" || ampValue.value == "milliamp" && voltValue.value == "volt") {
+        if (wattValue.value == "milliWatts" && voltValue.value == "volt" || wattValue.value == "watts" && voltValue.value == "kilovolt") {
           const results = {
-            kiloRes: parseFloat((p * i * v / 1000 / 1000).toFixed(7)),
-            normalRes: p * i * v / 1000,
-            milliRes: p * i * v
+            normalRes: i / (p * v) / 1000,
+            milliRes: i / (p * v)
           }
           return results
         }
-        if (ampValue.value == "amp" && voltValue.value == "kilovolt" || ampValue.value == "kiloamp" && voltValue.value == "volt") {
+        if (wattValue.value == "kiloWatts" && voltValue.value == "millivolt") {
           const results = {
-            kiloRes: p * i * v,
-            normalRes: p * i * v * 1000,
-            milliRes: p * i * v * 1000 * 1000
+            normalRes: (i / (p * v) * 1000) * 1000,
+            milliRes: ((i / (p * v) * 1000) * 1000) * 1000
           }
           return results
         }
-        if (ampValue.value == "milliamp" && voltValue.value == "millivolt") {
+        if (wattValue.value == "milliWatts" && voltValue.value == "kilovolt") {
           const results = {
-            kiloRes: (p * i * v / 1000 / 1000 / 1000).toFixed(9),
-            normalRes: parseFloat((p * i * v / 1000 / 1000).toFixed(7)),
-            milliRes: p * i * v / 1000
-          }
-          return results
-        }
-        if (ampValue.value == "kiloamp" && voltValue.value == "kilovolt") {
-          const results = {
-            kiloRes: p * i * v * 1000,
-            normalRes: p * i * v * 1000 * 1000,
-            milliRes: p * i * v * 1000 * 1000 * 1000
+            normalRes: ((i / (p * v) / 1000) / 1000).toFixed(7),
+            milliRes: ((i / (p * v) / 1000))
           }
           return results
         }
@@ -503,85 +519,79 @@
       const ltn_sq = 3
       if (p >= 0 || p <= 1) {
         if (voltTypeSelectorDrop.value == 'ltl_v') {
-          if (ampValue.value == "milliamp" && voltValue.value == "kilovolt" || ampValue.value == "amp" && voltValue.value == "volt" || ampValue.value == "kiloamp" && voltValue.value == "millivolt") {
+          if (wattValue.value == "milliWatts" && voltValue.value == "millivolt" || wattValue.value == "watts" && voltValue.value == "volt" || wattValue.value == "kiloWatts" && voltValue.value == "kilovolt") {
+
             const results = {
-              kiloRes: (ltl_sq * p * i * v / 1000).toFixed(10),
-              normalRes: (ltl_sq * p * i * v).toFixed(10),
-              milliRes: (ltl_sq * p * i * v * 1000).toFixed(10)
+              normalRes: (i / (ltl_sq * p * v)).toFixed(10),
+              milliRes: (i / (ltl_sq * p * v) * 1000).toFixed(10)
+            }
+
+            return results
+          }
+          if (wattValue.value == "watts" && voltValue.value == "millivolt" || wattValue.value == "kiloWatts" && voltValue.value == "volt") {
+            const results = {
+              normalRes: (i / (ltl_sq * p * v) * 1000).toFixed(10),
+              milliRes: (1000 * i / (ltl_sq * p * v) * 1000).toFixed(10)
             }
             return results
           }
-          if (ampValue.value == "amp" && voltValue.value == "millivolt" || ampValue.value == "milliamp" && voltValue.value == "volt") {
+          if (wattValue.value == "milliWatts" && voltValue.value == "volt" || wattValue.value == "watts" && voltValue.value == "kilovolt") {
             const results = {
-              kiloRes: (ltl_sq * p * i * v / 1000 / 1000).toFixed(10),
-              normalRes: (ltl_sq * p * i * v / 1000).toFixed(10),
-              milliRes: (ltl_sq * p * i * v).toFixed(10)
+              normalRes: (i / (ltl_sq * p * v) / 1000).toFixed(10),
+              milliRes: (i / (ltl_sq * p * v)).toFixed(10)
             }
             return results
           }
-          if (ampValue.value == "amp" && voltValue.value == "kilovolt" || ampValue.value == "kiloamp" && voltValue.value == "volt") {
+          if (wattValue.value == "kiloWatts" && voltValue.value == "millivolt") {
             const results = {
-              kiloRes: (ltl_sq * p * i * v).toFixed(10),
-              normalRes: (ltl_sq * p * i * v * 1000).toFixed(10),
-              milliRes: (ltl_sq * p * i * v * 1000 * 1000).toFixed(10)
+              normalRes: ((i / (ltl_sq * p * v) * 1000) * 1000).toFixed(10),
+              milliRes: (((i / (ltl_sq * p * v) * 1000) * 1000) * 1000).toFixed(10)
             }
             return results
           }
-          if (ampValue.value == "milliamp" && voltValue.value == "millivolt") {
+          if (wattValue.value == "milliWatts" && voltValue.value == "kilovolt") {
             const results = {
-              kiloRes: (ltl_sq * p * i * v / 1000 / 1000 / 1000).toFixed(10),
-              normalRes: (ltl_sq * p * i * v / 1000 / 1000).toFixed(10),
-              milliRes: (ltl_sq * p * i * v / 1000).toFixed(10)
-            }
-            return results
-          }
-          if (ampValue.value == "kiloamp" && voltValue.value == "kilovolt") {
-            const results = {
-              kiloRes: (ltl_sq * p * i * v * 1000).toFixed(10),
-              normalRes: (ltl_sq * p * i * v * 1000 * 1000).toFixed(10),
-              milliRes: (ltl_sq * p * i * v * 1000 * 1000 * 1000).toFixed(10)
+              normalRes: ((i / (ltl_sq * p * v) / 1000) / 1000).toFixed(10),
+              milliRes: ((i / (ltl_sq * p * v) / 1000)).toFixed(10)
             }
             return results
           }
         }
         if (voltTypeSelectorDrop.value == 'ltn_v') {
-          if (ampValue.value == "milliamp" && voltValue.value == "kilovolt" || ampValue.value == "amp" && voltValue.value == "volt" || ampValue.value == "kiloamp" && voltValue.value == "millivolt") {
+          if (wattValue.value == "milliWatts" && voltValue.value == "millivolt" || wattValue.value == "watts" && voltValue.value == "volt" || wattValue.value == "kiloWatts" && voltValue.value == "kilovolt") {
+
             const results = {
-              kiloRes: parseFloat((ltn_sq * p * i * v / 1000).toFixed(10)),
-              normalRes: parseFloat((ltn_sq * p * i * v).toFixed(10)),
-              milliRes: parseFloat((ltn_sq * p * i * v * 1000).toFixed(10))
+              normalRes: (i / (ltn_sq * p * v)).toFixed(10),
+              milliRes: (i / (ltn_sq * p * v) * 1000).toFixed(10)
+            }
+
+            return results
+          }
+          if (wattValue.value == "watts" && voltValue.value == "millivolt" || wattValue.value == "kiloWatts" && voltValue.value == "volt") {
+            const results = {
+              normalRes: (i / (ltn_sq * p * v) * 1000).toFixed(10),
+              milliRes: (1000 * i / (ltn_sq * p * v) * 1000).toFixed(10)
             }
             return results
           }
-          if (ampValue.value == "amp" && voltValue.value == "millivolt" || ampValue.value == "milliamp" && voltValue.value == "volt") {
+          if (wattValue.value == "milliWatts" && voltValue.value == "volt" || wattValue.value == "watts" && voltValue.value == "kilovolt") {
             const results = {
-              kiloRes: parseFloat((ltn_sq * p * i * v / 1000 / 1000).toFixed(10)),
-              normalRes: parseFloat((ltn_sq * p * i * v / 1000).toFixed(10)),
-              milliRes: parseFloat((ltn_sq * p * i * v).toFixed(10))
+              normalRes: (i / (ltn_sq * p * v) / 1000).toFixed(10),
+              milliRes: (i / (ltn_sq * p * v)).toFixed(10)
             }
             return results
           }
-          if (ampValue.value == "amp" && voltValue.value == "kilovolt" || ampValue.value == "kiloamp" && voltValue.value == "volt") {
+          if (wattValue.value == "kiloWatts" && voltValue.value == "millivolt") {
             const results = {
-              kiloRes: parseFloat((ltn_sq * p * i * v).toFixed(10)),
-              normalRes: parseFloat((ltn_sq * p * i * v * 1000).toFixed(10)),
-              milliRes: parseFloat((ltn_sq * p * i * v * 1000 * 1000).toFixed(10))
+              normalRes: ((i / (ltn_sq * p * v) * 1000) * 1000).toFixed(10),
+              milliRes: (((i / (ltn_sq * p * v) * 1000) * 1000) * 1000).toFixed(10)
             }
             return results
           }
-          if (ampValue.value == "milliamp" && voltValue.value == "millivolt") {
+          if (wattValue.value == "milliWatts" && voltValue.value == "kilovolt") {
             const results = {
-              kiloRes: parseFloat((ltn_sq * p * i * v / 1000 / 1000 / 1000).toFixed(10)),
-              normalRes: parseFloat((ltn_sq * p * i * v / 1000 / 1000).toFixed(10)),
-              milliRes: parseFloat((ltn_sq * p * i * v / 1000).toFixed(10))
-            }
-            return results
-          }
-          if (ampValue.value == "kiloamp" && voltValue.value == "kilovolt") {
-            const results = {
-              kiloRes: parseFloat((ltn_sq * p * i * v * 1000).toFixed(10)),
-              normalRes: parseFloat((ltn_sq * p * i * v * 1000 * 1000).toFixed(10)),
-              milliRes: parseFloat((ltn_sq * p * i * v * 1000 * 1000 * 1000).toFixed(10))
+              normalRes: ((i / (ltn_sq * p * v) / 1000) / 1000).toFixed(10),
+              milliRes: ((i / (ltn_sq * p * v) / 1000)).toFixed(10)
             }
             return results
           }
@@ -595,20 +605,18 @@
 
     calculateBtn.addEventListener('click', () => {
       if (typeSelect.value == 'dc') {
-        const result = dcFunc(ampEntered.value, voltEntered.value)
-        kResDiv.innerText = result.kiloRes < 1 ? result.kiloRes : (result.kiloRes).toLocaleString()
+        const result = dcFunc(wattEntered.value, voltEntered.value)
+        console.log(result);
         nResDiv.innerText = result.normalRes < 1 ? result.normalRes : (result.normalRes).toLocaleString()
         mResDiv.innerText = result.milliRes < 1 ? result.milliRes : (result.milliRes).toLocaleString()
       }
       else if (typeSelect.value == 'ac_1') {
-        const result = acSingle(ampEntered.value, voltEntered.value, powerValue.value)
-        kResDiv.innerText = result.kiloRes < 1 ? result.kiloRes : (result.kiloRes).toLocaleString()
+        const result = acSingle(wattEntered.value, voltEntered.value, powerValue.value)
         nResDiv.innerText = result.normalRes < 1 ? result.normalRes : (result.normalRes).toLocaleString()
         mResDiv.innerText = result.milliRes < 1 ? result.milliRes : (result.milliRes).toLocaleString()
       }
       else if (typeSelect.value == 'ac_3') {
-        const result = acTriple(ampEntered.value, voltEntered.value, powerValue.value)
-        kResDiv.innerText = result.kiloRes < 1 ? result.kiloRes : (result.kiloRes).toLocaleString()
+        const result = acTriple(wattEntered.value, voltEntered.value, powerValue.value)
         nResDiv.innerText = result.normalRes < 1 ? result.normalRes : (result.normalRes).toLocaleString()
         mResDiv.innerText = result.milliRes < 1 ? result.milliRes : (result.milliRes).toLocaleString()
 
@@ -617,8 +625,118 @@
   </script>
 {% schema %}
   {
-    "name": "Amps-to-Kilowatts",
+    "name": "Kilowatts-to-Amps",
     "settings": [
+      {
+        "type": "header",
+        "content": "Section Settings"
+      },
+      {
+        "type": "header",
+        "content": "Desktop Padding"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "padding_right",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Right",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "padding_left",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Left",
+        "default": 40
+      },
+      {
+        "type": "header",
+        "content": "Mobile Padding"
+      },
+      {
+        "type": "range",
+        "id": "padding_top_mb",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "padding_right_mb",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Right",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom_mb",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "padding_left_mb",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Left",
+        "default": 20
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Page Full Width",
+        "default": false
+      },
+      {
+        "type": "number",
+        "id": "maxWidth",
+        "label": "Page Width",
+        "default": 1440
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background Color",
+        "default": "transparent"
+      },
       {
         "type": "header",
         "content": "Navigation Links Settings"
@@ -627,11 +745,64 @@
         "type": "link_list",
         "id": "menuNav",
         "label": "Enter The Menu Links"
+      },
+      {
+        "type": "header",
+        "content": "Page Styling Settings"
+      },
+      {
+        "type": "color",
+        "id": "bg-color",
+        "label": "Back Ground Color"
+      },
+      {
+        "type": "header",
+        "content": "Calculator Settings"
+      },
+      {
+        "type": "text",
+        "id": "Calculator-title",
+        "label": "Add Calculator Heading"
+      },
+      {
+        "type": "range",
+        "id": "font_size",
+        "min": 12,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 16
+      },
+      {
+        "type": "color",
+        "id": "calc-bg-color",
+        "label": "Calculator Background Color"
+      },
+      {
+        "type": "range",
+        "id": "bg_blur",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "label": "Blur Effect",
+        "default": 5
+      },
+      {
+        "type": "range",
+        "id": "bg_opacity",
+        "min": 1,
+        "max": 99,
+        "step": 1,
+        "unit": "%",
+        "label": "Color Opacity",
+        "default": 50
       }
     ],
     "presets": [
       {
-        "name": "Amps-converter"
+        "name": "kiloWatt-converter"
       }
     ]
   }

@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amps to Kilowatts (kW) conversion calculator</title>
+</head>
 <style>
   .calculatorCont {
     position: relative;
@@ -182,14 +190,14 @@
     justify-content: center;
   }
 
-    .Menu {
+  .menu {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
   }
 
-  .Menu-link>a {
+  .menu-link>a {
     color: black;
     text-decoration: none;
   }
@@ -248,10 +256,12 @@
     margin: 0;
   }
 </style>
-    <div class="Links">
-    <div class="Menu">
+
+<body>
+  <div class="Links">
+    <div class="menu">
       {% for link in section.settings.menuNav.links %}
-      <div class="Menu-link">
+      <div class="menu-link">
         <a href="{{ link.url }}">{{ link.title }}</a>
       </div>
       {% endfor %}
@@ -330,7 +340,7 @@
       <div class="Calculator-Btn">
         <button class="button btn" id="calculateBtn">Calculate</button>
         <button class="button btn" id="resetBtn">Reset</button>
-        <a href="https://aleena-practice.myshopify.com/pages/kilowatts-to-amps-calculator"><button class="button btn" id="SwapBtn">Swap</button></a>
+        <button class="button btn" id="SwapBtn"><a href="kws-amp.html">Swap</a></button>
       </div>
       <div class="dataRes">
         <span>
@@ -361,6 +371,9 @@
       </div>
     </div>
   </div>
+
+
+
   <script>
     const ampEntered = ampInp
     const voltEntered = voltInp
@@ -615,24 +628,6 @@
       }
     })
   </script>
-{% schema %}
-  {
-    "name": "Amps-to-Kilowatts",
-    "settings": [
-      {
-        "type": "header",
-        "content": "Navigation Links Settings"
-      },
-      {
-        "type": "link_list",
-        "id": "menuNav",
-        "label": "Enter The Menu Links"
-      }
-    ],
-    "presets": [
-      {
-        "name": "Amps-converter"
-      }
-    ]
-  }
-{% endschema %}
+</body>
+
+</html>
