@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remote Controlled Car Lights</title>
+</head>
+
+<body>
+    <style>
+        body {
+            padding: 0%;
+            margin: 0%;
+        }
+
+        .carCont {
+            width: 100%;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        .remoteCont {
+            background-image: url(./images/remotes/remote-container.webp);
+            width: 560px;
+            height: 360px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 30%;
+            left: 70px;
+            display: flex;
+            align-items: start;
+            justify-content: center;
+        }
+
+        .remoteBtnContainer {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            width: 74%;
+            gap: 12px;
+            padding-top: 35px;
+        }
+
+        .remoteBtnContainer .row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 3px 0px;
+        }
+
+        .column {
+            min-width: 70px;
+            min-height: 70px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remoteBtnContainer .row .column>img {
+            width: 85%;
+            filter: grayscale(1);
+        }
+
+        .Column {
+            min-width: 70px;
+            min-height: 70px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .Column>img {
+            width: 50%;
+            filter: grayscale(1);
+        }
+
+        .clicked>img {
+            filter: grayscale(0) !important;
+        }
+    </style>
+    <section id="remoteCarCont">
+        <div class="carColumn">
+            <div class="carCont" style="background-image: url('./images/car-background.jpg')">
+                <div class="remoteCont">
+                    <div class="remoteBtnContainer">
+                        <div class="row">
+                            <div class="column" data-uid="">
+                                <img src="./images/remotes/lightbar-btn.avif" alt="">
+                            </div>
+                            <div class="column">
+                                <img src="./images/remotes/bumperLight.avif" alt="">
+                            </div>
+                            <div class="column">
+                                <img src="./images/remotes/whip-light.avif" alt="">
+                            </div>
+                            <div class="column">
+                                <img src="./images/remotes/rockLIght.avif" alt="">
+                            </div>
+                            <div class="Column">
+                                <img src="./images/remotes/up_arrow.avif" alt="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <img src="./images/remotes/Headlights.avif" alt="">
+                            </div>
+                            <div class="column">
+                                <img src="./images/remotes/highBeams.avif" alt="">
+                            </div>
+                            <div class="column">
+                                <img src="./images/remotes/stereo.avif" alt="">
+                            </div>
+                            <div class="column">
+                                <img src="./images/remotes/speaker_Lights.avif" alt="">
+                            </div>
+                            <div class="Column">
+                                <img src="./images/remotes/menu.avif" alt="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <img src="./images/remotes/race_radio.avif" alt="">
+                            </div>
+                            <div class="column">
+                                <img src="./images/remotes/left_indicator_arrow.avif" alt="">
+                            </div>
+                            <div class="column">
+                                <img src="./images/remotes/hazard_btn.avif" alt="">
+                            </div>
+                            <div class="column">
+                                <img src="./images/remotes/right_indicator_btn.avif" alt="">
+                            </div>
+                            <div class="Column">
+                                <img src="./images/remotes/down_arrow.avif" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <script>
+        const remoteBtn = document.querySelectorAll('.column')
+        const backgroundImages = [
+            {
+                image: './images/LIGHTBAR.webp',
+                btn: remoteBtn[0]
+            },
+            {
+                image: './images/bumper-light.webp',
+                btn: remoteBtn[1]
+            },
+            {
+                image: './images/whip-light.webp',
+                btn: remoteBtn[2]
+            },
+            {
+                image: './images/ROCKLIGHTS.webp',
+                btn: remoteBtn[3]
+            },
+            {
+                image: './images/HEADLIGHTS.webp',
+                btn: remoteBtn[4]
+            },
+            {
+                image: './images/HIGHBEAMS.webp',
+                btn: remoteBtn[5]
+            },
+            {
+                image: './images/Stereo.webp',
+                btn: remoteBtn[6]
+            },
+            {
+                image: './images/SPEAKERLIGHTS.webp',
+                btn: remoteBtn[7]
+            },
+            {
+                image: './images/race-radio.webp',
+                btn: remoteBtn[8]
+            },
+            {
+                image: './images/LEFT-indicator.webp',
+                btn: remoteBtn[9]
+            },
+            {
+                image: './images/both-indicator.webp',
+                btn: remoteBtn[10]
+            },
+            {
+                image: './images/RIGHT-indicator.webp',
+                btn: remoteBtn[11]
+            }
+        ]
+
+        const carCont = document.querySelector('.carCont')
+        const carContBG = carCont.style.backgroundImage.split(',')
+
+        backgroundImages.forEach((data, ind) => {
+            data.btn.addEventListener('click', () => {
+                data.btn.classList.toggle('clicked');
+                const imageUrl = `url('${data.image}')`;
+                const index = carContBG.indexOf(imageUrl);
+                if (index !== -1) {
+                    carContBG.splice(index, 1);
+                } else {
+                    carContBG.unshift(imageUrl);
+                }
+                carCont.style.backgroundImage = carContBG;
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>
