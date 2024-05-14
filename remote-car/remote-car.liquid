@@ -1,0 +1,593 @@
+<!-- Section File Name: try.liquid -->
+<!-- Section Name: Remote-car -->
+<!-- Presets Name: remote-car -->
+
+<div id="sid-{{ section.id }}">
+  <div class="main_container">
+    <div class="content_wrapper">
+      <section id="remoteCarCont">
+        <div class="carColumn">
+          <div
+            class="carCont"
+            style="background-image: url('{{ section.settings.bg_image | image_url }}')"
+          >
+                <button class="handle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M192 64C86 64 0 150 0 256S86 448 192 448H448c106 0 192-86 192-192s-86-192-192-192H192zM496 168a40 40 0 1 1 0 80 40 40 0 1 1 0-80zM392 304a40 40 0 1 1 80 0 40 40 0 1 1 -80 0zM168 200c0-13.3 10.7-24 24-24s24 10.7 24 24v32h32c13.3 0 24 10.7 24 24s-10.7 24-24 24H216v32c0 13.3-10.7 24-24 24s-24-10.7-24-24V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h32V200z"/></svg></button>
+              <div class="remoteCont collapsed">
+                <img width="100%" src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/remote-body.webp?v=1715444596" />
+                  <div class="remoteBtnContainer">
+                  <div class="row">
+                    <div class="column">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/Light-bar.avif?v=1715443917"
+                        alt=""
+                      >
+                    </div>
+                    <div class="column">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/bumper-light.avif?v=1715443917"
+                        alt=""
+                      >
+                    </div>
+                    <div class="column">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/whip-light.avif?v=1715443917"
+                        alt=""
+                      >
+                    </div>
+                    <div class="column">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/rock-light.avif?v=1715443917"
+                        alt=""
+                      >
+                    </div>
+                    <div class="Column">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/arrow-up.avif?v=1715443917"
+                        alt=""
+                      >
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="column">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/headlight.avif?v=1715443917"
+                        alt=""
+                      >
+                    </div>
+                    <div class="column">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/high-beam.avif?v=1715443917"
+                        alt=""
+                      >
+                    </div>
+                    <div class="column">
+                      <img src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/stereo.avif?v=1715443918" alt="">
+                    </div>
+                    <div class="column">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/speaker_Lights.avif?v=1715443917"
+                        alt=""
+                      >
+                    </div>
+                    <div class="Column">
+                      <img src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/menu.avif?v=1715443917" alt="">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="column">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/race_radio.avif?v=1715443917"
+                        alt=""
+                      >
+                    </div>
+                    <div class="column">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/left_arrow.avif?v=1715443917"
+                        alt=""
+                      >
+                    </div>
+                    <div class="column">
+                      <img src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/hazard.avif?v=1715443917" alt="">
+                    </div>
+                    <div class="column">
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/right_arrow.avif?v=1715443917"
+                        alt=""
+                      >
+                    </div>
+                    <div class="Column">
+                      <img src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/down.avif?v=1715443917" alt="">
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            <div class="responsive-remote">
+              
+            </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<style>
+    body{
+      padding: 0%;
+      margin: 0%;
+  }
+  .carCont{
+      width: 100%;
+      padding: 25vw;
+      background-size: cover;
+      background-position: left;
+      background-repeat: no-repeat;
+      position: relative;
+  }
+  .remoteCont {
+    width: 560px;
+    height: 360px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 15%;
+    left: -19px;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    transition: 1s;
+    transform: scale(0.8);
+    margin: 0 auto;
+  }
+  .handle{
+    display: none !important;
+  }
+  @media only screen and (max-width: 2560px) and  (min-width: 2200px){
+    .remoteCont {
+      transform: scale(2);
+      top: 30vh;
+      left: 13vw;
+    }
+  }
+  @media only screen and (max-width: 2200px) and  (min-width: 1440px){
+    .remoteCont {
+      transform: scale(1.5);
+      top: 20vh;
+      left: 13vw;
+    }
+  }
+  @media only screen and (max-width: 1440px) and (min-width: 1300px){
+    .remoteCont {
+      transform: scale(1.2);
+      left: 30px;
+    }
+  }
+  @media only screen and (max-width: 1300px){
+    .remoteCont {
+      transform: scale(0.8);
+      left: -30px;
+    }
+  }
+  @media only screen and (max-width: 1000px){
+    .remoteCont {
+      left: -90px;
+      transform: scale(0.8);
+    }
+    .collapsed {
+      left: -460px !important;
+      bottom: 15% !important;
+    }
+    .handle{
+      display: flex !important;
+    }
+    /* .handle::after {
+      position: absolute;
+      content: '>';
+      width: 28px;
+      height: 33vh;
+      background-color: #2d312e;
+      right: 0;
+      top: 67px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 37px;
+      font-weight: 900;
+      font-family: cursive;
+      color: white;
+      cursor: pointer;
+    } */
+    .carCont {
+        background-size: 150% !important;
+        background-position: right;
+    }
+  }
+  @media only screen and (max-width: 768px){
+    .remoteCont {
+      transform: scale(0.6);
+      left: 0;
+      right: 0;
+    }
+    .collapsed {
+      bottom: -100vh !important;
+    }
+    /* .handle::after {
+      display: none !important;
+    }
+    .handle::before {
+      position: absolute;
+      content: '^';
+      width: 75%;
+      height: 25px;
+      background-color: #2d312e;
+      top: 6px;
+      right: 70px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 37px;
+      font-weight: 900;
+      font-family: cursive;
+      color: white;
+      cursor: pointer;
+    } */
+    .collapsed{
+      left: 0vw !important;
+      right: 0px !important;
+    }
+    .remoteCont {
+      bottom: -30px;
+    }
+    .carCont {
+      background-size: 150% !important;
+      background-position: right;
+    }
+
+  }
+  @media only screen and (max-width: 550px){
+    .carCont {
+      padding-bottom: 200px;
+    }
+    .remoteCont {
+      transform: scale(0.6);
+      bottom: -4vh;
+    }
+  }
+  @media only screen and (max-width: 500px){
+    .remoteCont {
+      transform: scale(0.7);
+      left: -70px !important;
+      bottom: -4vh;
+    }
+    .carCont{
+      background-size: 200% !important;
+      background-position: 87%;
+    }
+  }
+  @media only screen and (max-width: 400px){
+    .remoteCont {
+      transform: scale(0.6);
+      left: -95px !important;
+      bottom: -4vh ;
+    }
+  }
+  @media only screen and (max-width: 350px){
+    .remoteCont {
+      transform: scale(0.6);
+      left: -105px !important;
+      bottom: -7vh;
+    }
+  }
+  @media only screen and (max-width: 320px){
+    .remoteCont {
+      transform: scale(0.5);
+      left: -120px !important;
+      bottom: -7vh;
+    }
+  }
+  .remoteBtnContainer {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      width: 74%;
+      gap: 12px;
+      padding-top: 35px;
+      position: absolute;
+  }
+    .handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 100%;
+    /* border-radius: 100%; */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba(51, 53, 50, 0);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.4px);
+    -webkit-backdrop-filter: blur(5.4px);
+    background: rgba(51, 53, 50, 0);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.4px);
+    -webkit-backdrop-filter: blur(5.4px);
+  }
+  button.handle > svg {
+    width: 30px;
+    fill: white;
+}
+  .remoteBtnContainer .row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 3px 0px;
+  }
+  .column {
+      min-width: 70px;
+      min-height: 70px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  .remoteBtnContainer .row .column > img {
+      width: 85%;
+      filter: grayscale(1);
+  }
+  .Column {
+      min-width: 70px;
+      min-height: 70px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  .carColumn {
+    background-color: #040308;
+  }
+  .Column > img {
+      width: 50%;
+      filter: grayscale(1);
+  }
+  .clicked > img {
+      filter: grayscale(0) !important;
+  }
+    #sid-{{section.id}} .main_container{
+      width: 100%;
+      position: relative;
+      background-color: {{section.settings.bg_color}};
+      overflow: hidden;
+    }
+    #sid-{{section.id}} .content_wrapper{
+      {% if section.settings.full_width == false %}
+        max-width: {{section.settings.maxWidth}}px;
+      {% endif %}
+      width: 100%;
+      margin: 0 auto;
+      padding: {{ section.settings.padding_top }}px {{ section.settings.padding_right }}px {{ section.settings.padding_bottom }}px {{ section.settings.padding_left }}px;
+    }
+    #sid-{{section.id}} {
+
+    }
+
+    @media only screen and (max-width: 767px){
+      #sid-{{section.id}} .content_wrapper{
+        padding: {{ section.settings.padding_top_mb }}px {{ section.settings.padding_right_mb }}px {{ section.settings.padding_bottom_mb }}px {{ section.settings.padding_left_mb }}px;
+      }
+      #sid-{{section.id}} .main_container{
+
+      }
+    }
+</style>
+<script>
+  const remoteBtn = document.querySelectorAll('.column')
+const backgroundImages = [
+    {
+        image: 'https://cdn.shopify.com/s/files/1/0672/5877/7818/files/LIGHTBAR.webp?v=1715445097',
+        btn: remoteBtn[0]
+    },
+    {
+        image: 'https://cdn.shopify.com/s/files/1/0672/5877/7818/files/BUMPERLIGHTS.webp?v=1715445097',
+        btn: remoteBtn[1]
+    },
+    {
+        image: 'https://cdn.shopify.com/s/files/1/0672/5877/7818/files/WHIPLIGHT.webp?v=1715445097',
+        btn: remoteBtn[2]
+    },
+    {
+        image: 'https://cdn.shopify.com/s/files/1/0672/5877/7818/files/ROCKLIGHTS.webp?v=1715445097',
+        btn: remoteBtn[3]
+    },
+    {
+        image: 'https://cdn.shopify.com/s/files/1/0672/5877/7818/files/HEADLIGHTS.webp?v=1715445097',
+        btn: remoteBtn[4]
+    },
+    {
+        image: 'https://cdn.shopify.com/s/files/1/0672/5877/7818/files/HIGHBEAMS.webp?v=1715445097',
+        btn: remoteBtn[5]
+    },
+    {
+        image: 'https://cdn.shopify.com/s/files/1/0672/5877/7818/files/MUSIC.webp?v=1715445097',
+        btn: remoteBtn[6]
+    },
+    {
+        image: 'https://cdn.shopify.com/s/files/1/0672/5877/7818/files/SPEAKERLGIHTS.webp?v=1715445097',
+        btn: remoteBtn[7]
+    },
+    {
+        image: 'https://cdn.shopify.com/s/files/1/0672/5877/7818/files/COMS.webp?v=1715445098',
+        btn: remoteBtn[8]
+    },
+    {
+        image: 'https://cdn.shopify.com/s/files/1/0672/5877/7818/files/LEFT.webp?v=1715445097',
+        btn: remoteBtn[9]
+    },
+    {
+        image: 'https://cdn.shopify.com/s/files/1/0672/5877/7818/files/HAZARDS.webp?v=1715445098',
+        btn: remoteBtn[10]
+    },
+    {
+        image: 'https://cdn.shopify.com/s/files/1/0672/5877/7818/files/RIGHT-light.webp?v=1715445097',
+        btn: remoteBtn[11]
+    }
+]
+
+const carCont = document.querySelector('.carCont')
+const carContBG = carCont.style.backgroundImage.split(',')
+const remoteCollapser = document.querySelector('.handle')
+const remote = document.querySelector('.remoteCont')
+
+backgroundImages.forEach((data, ind) => {
+    data.btn.addEventListener('click', () => {
+        data.btn.classList.toggle('clicked');
+        const imageUrl = `url('${data.image}')`;
+        const index = carContBG.indexOf(imageUrl);
+        if (index !== -1) {
+            carContBG.splice(index, 1);
+        } else {
+            carContBG.unshift(imageUrl);
+        }
+        carCont.style.backgroundImage = carContBG;
+    });
+});
+remoteCollapser.addEventListener('click',()=>{
+    remote.classList.toggle('collapsed')
+})
+</script>
+
+{% schema %}
+{
+  "name": "Remote-car",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Mobile Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Page Full Width",
+      "default": false
+    },
+    {
+      "type": "number",
+      "id": "maxWidth",
+      "label": "Page Width",
+      "default": 1440
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "transparent"
+    },
+    {
+      "type": "header",
+      "content": "Car-section"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Car Image"
+    }
+
+  ],
+  "presets": [
+    {
+      "name": "remote-car"
+    }
+  ]
+}
+{% endschema %}
