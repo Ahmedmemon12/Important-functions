@@ -1,0 +1,598 @@
+<!-- Section File Name: product-builder.liquid -->
+<!-- Section Name: Product Builder -->
+<!-- Presets Name: Product Builder -->
+
+<div id="sid-{{ section.id }}">
+  <div class="main_container">
+    <div class="content_wrapper">
+      <div class="product-show-case">
+        <div class="product-stand">
+          <img src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/02_1_1024x1024_192537cb-cc13-460c-837a-496d9998694b.webp?v=1715606033">
+          <div class="basketCont">
+            <div class="basket bskt-0">
+              <button class="addCartBtn fillCart">Fill Bin 1</button>
+              <div class="itemImg"></div>
+            </div>
+            <div class="basket bskt-1">
+              <button class="addCartBtn fillCart">Fill Bin 2</button>
+              <div class="itemImg"></div>
+            </div>
+            <div class="basket bskt-2">
+              <button class="addCartBtn fillCart">Fill Bin 3</button>
+              <div class="itemImg"></div>
+            </div>
+            <div class="basket bskt-3">
+              <button class="addCartBtn fillCart">Fill Bin 4</button>
+              <div class="itemImg"></div>
+            </div>
+            <div class="basket bskt-4">
+              <button class="addCartBtn fillCart">Fill Bin 5</button>
+              <div class="itemImg"></div>
+            </div>
+            <div class="basket bskt-5">
+              <button class="addCartBtn fillCart">Fill Bin 6</button>
+              <div class="itemImg"></div>
+            </div>
+          </div>
+        </div>
+        <div class="product-stand">
+          <img src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/02_1_1024x1024_192537cb-cc13-460c-837a-496d9998694b.webp?v=1715606033">
+          <div class="basketCont">
+            <div class="basket bskt-6">
+              <button class="addCartBtn fillCart">Fill Bin 1</button>
+              <div class="itemImg"></div>
+            </div>
+            <div class="basket bskt-7">
+              <button class="addCartBtn fillCart">Fill Bin 2</button>
+              <div class="itemImg"></div>
+            </div>
+            <div class="basket bskt-8">
+              <button class="addCartBtn fillCart">Fill Bin 3</button>
+              <div class="itemImg"></div>
+            </div>
+            <div class="basket bskt-9">
+              <button class="addCartBtn fillCart">Fill Bin 4</button>
+              <div class="itemImg"></div>
+            </div>
+            <div class="basket bskt-10">
+              <button class="addCartBtn fillCart">Fill Bin 5</button>
+              <div class="itemImg"></div>
+            </div>
+            <div class="basket bskt-11">
+              <button class="addCartBtn fillCart">Fill Bin 6</button>
+              <div class="itemImg"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-cards hide">
+        {% for product in section.settings['product-collection'].products %}
+          <div class="cardDiv">
+            <div class="cardImg">
+              <img src="{{ product.images[0] | image_url }}">
+            </div>
+            <div class="cardTitle">
+              <h4>{{ product.title }}</h4>
+            </div>
+            <div class="price">
+              <span>{{ product.price | money }}</span>
+              <s>{{ product.compare_at_price | money }}</s>
+            </div>
+            <div class="quantity-selector">
+              <span>Quantity</span>
+              {% render 'kawaii-quantity', min: 12, step: product.metafields.custom.minimum_purchase %}
+            </div>
+            <div class="cart-btn">
+              <button class="addCartBtn addToCart" data-pid="{{ product.variants.first.id }}">Add to Cart</button>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #sid-{{section.id}} .product-show-case {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  #sid-{{section.id}} .cardDiv {
+    width: 20%;
+    min-width: 204px;
+  }
+  #sid-{{section.id}} .cardDiv > .cardImg {
+    width: 100%;
+  }
+  #sid-{{section.id}} .cardDiv > .cardImg > img {
+    width: 100%;
+  }
+  #sid-{{section.id}} .product-cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  #sid-{{section.id}} .hide {
+    display: none !important;
+  }
+  #sid-{{section.id}} .basketCont {
+    position: absolute;
+    z-index: 2;
+    top: 107px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0px 20px;
+  }
+  .loading {
+    background-color: #ff68998a !important;
+    color: transparent !important;
+  }
+  .loading::after {
+    border: 3px solid white !important;
+    border-left-color: transparent !important;
+    position: absolute !important;
+    width: 15px !important;
+    height: 15px !important;
+    animation: spin89345 1s linear infinite !important;
+    right: 0;
+    left: 0;
+    margin: auto;
+    content: '' !important;
+  }
+  
+  .loading::after {
+    border: 4px solid rgba(0, 0, 0, .1);
+    border-left-color: transparent;
+    width: 36px;
+    height: 36px;
+    content: '';
+  }
+  .loading::after {
+    border: 4px solid rgba(0, 0, 0, .1);
+    border-left-color: transparent;
+    border-radius: 50%;
+    content: '';
+}
+
+@keyframes spin89345 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+  #sid-{{section.id}} .basket {
+    min-height: 11vh;
+    min-width: 10vw;
+    max-width: 20vw;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 77px;
+    flex-direction: column;
+    align-items: center;
+}
+  .itemImg {
+    width: 132px;
+    position: relative;
+}
+
+  .itemImg > img {
+    width: 100%;
+  }
+  #sid-{{section.id}} button.addCartBtn:hover {
+    background: #4acdd5;
+  }
+  #sid-{{section.id}} button.addCartBtn {
+    border: none;
+    background: #ff6899;
+    color: #fff;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-family: Quicksand;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    width: max-content;
+    height: 23px;
+    transition: 0.5s;
+    position: relative;
+  }
+  #sid-{{section.id}} .itemBtnCont {
+    position: absolute;
+    right: 0px;
+    bottom: 25px;
+  }
+  #sid-{{section.id}} .itemQuant {
+    background-color: #4acdd5;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-family: cursive;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 2px;
+  }
+  #sid-{{section.id}} .itemBin {
+    width: 30px;
+    height: 30px;
+    background-color: #be95ff;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  #sid-{{section.id}} .itemBin > img {
+    width: 50%;
+  }
+  #sid-{{section.id}} .product-stand{
+    width: 50%;
+    position: relative;
+  }
+  #sid-{{section.id}} .product-stand > img{
+    width: 100%;
+  }
+  #sid-{{section.id}} .main_container{
+    width: 100%;
+    position: relative;
+    background-color: {{section.settings.bg_color}};
+  }
+  #sid-{{section.id}} .content_wrapper{
+    {% if section.settings.full_width == false %}
+      max-width: {{section.settings.maxWidth}}px;
+    {% endif %}
+    width: 100%;
+    margin: 0 auto;
+    padding: {{ section.settings.padding_top }}px {{ section.settings.padding_right }}px {{ section.settings.padding_bottom }}px {{ section.settings.padding_left }}px;
+  }
+  #sid-{{section.id}} button.addCartBtn:disabled {
+    background-color: #ffa3c1 !important;
+    cursor: not-allowed !important;
+}
+
+
+
+  @media only screen and (max-width: 767px){
+    #sid-{{section.id}} .content_wrapper{
+      padding: {{ section.settings.padding_top_mb }}px {{ section.settings.padding_right_mb }}px {{ section.settings.padding_bottom_mb }}px {{ section.settings.padding_left_mb }}px;
+    }
+    #sid-{{section.id}} .main_container{
+
+    }
+  }
+</style>
+    <script>
+      let metaImages = [
+      {% for product in section.settings['product-collection'].products %}
+        {
+        img: "{{ product.metafields.custom.image_for_basket | image_url }}"
+        },
+        {% endfor %}
+      ]
+        const cartBtn = document.querySelectorAll('.addToCart')
+        const quantityInp = document.querySelectorAll('#Quantity-')
+        const basketDiv = document.querySelector('.product-show-case')
+        const prodCards = document.querySelector('.product-cards')
+        const FillBtn = document.querySelectorAll('.fillCart')
+        const basket0 = document.querySelector('.bskt-0')
+      
+        let cardData = [] 
+        let fillBtnInd = ''
+        let fruitBasket = []
+        let prodResult
+        let fillInd = -1
+    
+      FillBtn.forEach((btn, ind)=>{
+        btn.addEventListener('click',()=>{
+            fillBtnInd = btn
+            prodCards.classList.toggle('hide')
+            basketDiv.classList.toggle('hide')
+            // fruitBasket.push(btn.parentNode.childNodes[3])
+            fillInd = ind
+            fruitBasket.push(btn.parentNode.querySelector(`.bskt-${ind} .itemImg`))
+            console.log('fruitBasket',fruitBasket)
+        })
+      })
+    
+          window.addEventListener('DOMContentLoaded',()=>{
+            for (i = 0; i <= 11; i++){
+            document.querySelector(`.bskt-${i} button`).disabled = false
+            }
+            getCartData().then(res => {
+              console.log(res.items)
+              cardData.length = 0;  
+              res.items.forEach((data, ind)=>{
+                fruitBasket.unshift(document.querySelector(`.bskt-${data.properties.btnInd} .itemImg`))
+                cardData.unshift({prodKey: data.key, btnInd: data.properties.btnInd, image: data.properties.productimg, quantity: data.quantity})
+              })
+              console.log(cardData)
+              basketFiller(cardData)
+            })
+            setTimeout(()=>{
+            cardData.forEach((data)=>{
+              document.querySelector(`#removeCart-${data.btnInd}`).addEventListener('click', (e)=>{
+            setTimeout(()=>{
+                customUpdateCartJS(0, data.prodKey)
+            }, 200)
+              e.target.parentNode.parentNode.parentNode.innerHTML = ''
+              e.target.parentNode.parentNode.parentNode.previousSibling.previousSibling.disabled = false
+              });
+              })
+            },1000)
+            })
+    
+      
+       cartBtn.forEach((btn, ind)=>{
+          btn.addEventListener('click',()=>{
+          btn.classList.add('loading')
+          customAddToCartJS(quantityInp[ind].value, btn.dataset.pid, btn, {productimg: metaImages[ind].img, btnInd: fillInd} )
+            setTimeout(()=>{
+            getCartData().then(res => {
+              console.log(res.items)
+              cardData.length = 0;  
+              res.items.forEach((data)=>{
+                cardData.unshift({prodKey: data.key, btnInd: data.properties.btnInd, image: data.properties.productimg, quantity: data.quantity})
+              })
+              console.log('cardData--->',cardData)
+              basketFiller(cardData)
+            })
+            setTimeout(()=>{
+            cardData.forEach((data)=>{
+            document.querySelector(`#removeCart-${data.btnInd}`).addEventListener('click', (e)=>{
+              customUpdateCartJS(0, data.prodKey)
+            });
+            })
+            },200)
+            },1000)
+            
+          })
+        })
+        function basketFiller(image){
+          fruitBasket.forEach((basket, ind)=>{
+            basket.innerHTML = `<div class="itemBtnCont"><div class="itemQuant">${image[ind].quantity}</div>
+            <div class="itemBin" id="removeCart-${image[ind].btnInd}"><img src="https://cdn.shopify.com/s/files/1/0672/5877/7818/files/trash-can-solid.svg?v=1715855334"></div></div>
+            <img src="${image[ind].image}">`
+            console.log(image[ind])
+            document.querySelector(`.bskt-${image[ind].btnInd} button`).disabled = true
+          })
+      }
+      function getCartData() {
+      return new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        var url = "/cart.js";
+        xhr.open("GET", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              var cartData = JSON.parse(xhr.responseText);
+              resolve(cartData);
+            } else {
+              reject("Failed to fetch cart data. Status: " + xhr.status);
+            }
+          }
+        };
+        xhr.send();
+      });
+    }
+      
+      function customAddToCartJS(qty,variantID, btn, lineItem = null) {
+      var xhr = new XMLHttpRequest();
+          var url = "/cart/add.js";
+          xhr.open("POST", url, true);
+          xhr.setRequestHeader("Content-Type", "application/json");
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var parsedState = JSON.parse(xhr.responseText);
+                if(document.querySelector(".ajax-cart-disabled")) window.location = "/cart";
+                // document.querySelector('cart-notification').renderContents(parsedState);
+                btn.classList.remove("loading");
+                prodCards.classList.toggle('hide')
+                basketDiv.classList.toggle('hide')
+            }
+          };
+          $.ajax({
+              url: "/cart",
+              type: "GET",
+              dataType: "json",
+              success: function(data) {
+                console.log(data)
+              },
+          });
+          var sectionsToRender = ["cart-notification-tier", "cart-notification-product", "cart-notification-button", "cart-icon-bubble"];
+          var sections_url = window.location.pathname;
+          var data = JSON.stringify(
+            lineItem != null ?
+            {
+              "quantity": qty,
+              "id": variantID,
+              "sections" : sectionsToRender,
+              "sections_url" : sections_url,
+              "properties" : lineItem
+            } : {
+              "quantity": qty,
+              "id": variantID,
+              "sections" : sectionsToRender,
+              "sections_url" : sections_url
+            }
+          );
+          xhr.send(data);
+        }
+      function customUpdateCartJS(qty, variantID) {
+      var xhr = new XMLHttpRequest();
+          var url = `${routes.cart_change_url}`;
+          xhr.open("POST", url, true);
+          xhr.setRequestHeader("Content-Type", "application/json");
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // var parsedState = JSON.parse(xhr.responseText);
+                console.log(xhr)
+              getCartData().then(res => {
+              console.log(res.items)
+              cardData.length = 0;  
+              res.items.forEach((data, ind)=>{
+                fruitBasket.unshift(document.querySelector(`.bskt-${data.properties.btnInd} .itemImg`))
+                cardData.unshift({prodKey: data.key, btnInd: data.properties.btnInd, image: data.properties.productimg, quantity: data.quantity})
+              })
+              console.log(cardData)
+            })
+            }
+          };
+          var sectionsToRender = ["cart-notification-tier", "cart-notification-product", "cart-notification-button", "cart-icon-bubble"];
+          var sections_url = window.location.pathname;
+          var data = JSON.stringify(
+            {
+              "quantity": qty,
+              "id": variantID,
+              "sections" : sectionsToRender,
+              "sections_url" : sections_url
+            }
+          );
+          xhr.send(data);
+        }
+    
+    </script>
+{% schema %}
+{
+  "name": "Product Builder",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "header",
+      "content": "Desktop Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Mobile Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Right",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mb",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Left",
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Page Full Width",
+      "default": false
+    },
+    {
+      "type": "number",
+      "id": "maxWidth",
+      "label": "Page Width",
+      "default": 1440
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "transparent"
+    },
+    {
+      "type": "header",
+      "content": "Products-settings"
+    },
+    {
+      "type": "collection",
+      "id": "product-collection",
+      "label": "Products of Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Builder"
+    }
+  ]
+}
+{% endschema %}
