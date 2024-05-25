@@ -1,0 +1,98 @@
+<!-- Section File Name: extra-security.liquid -->
+<!-- Section Name: Enable Security -->
+<!-- Presets Name: Enable Security -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+    {% if section.settings.selection %}
+      document.addEventListener('mousedown', event => event.preventDefault());
+      document.addEventListener('selectstart', event => event.preventDefault());
+      {% endif %}
+
+    {% if section.settings.rightClick %}
+      document.addEventListener('contextmenu', event => event.preventDefault());
+    {% endif %}
+    {% if section.settings.printer %}
+      document.addEventListener('keydown', function (e) {
+          if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+              e.preventDefault();
+          }
+      });
+    {% endif %}
+    {% if section.settings.saving %}  
+      document.addEventListener('keydown', function (e) {
+          if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+              e.preventDefault();
+          }
+      });
+    {% endif %}
+    {% if section.settings.src_code %}
+      document.addEventListener('keydown', function (e) {
+          if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'u') {
+              e.preventDefault();
+          }
+      });
+      {% endif %}
+      {% if section.settings.developer_tool %}
+      document.addEventListener('keydown', function (e) {
+
+          if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key.toLowerCase() === 'c' || e.key.toLowerCase() === 'i' || e.key.toLowerCase() === 'j')) {
+              e.preventDefault();
+          } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'u') {
+              e.preventDefault();
+          } else if (e.key === 'F12') {
+              e.preventDefault();
+          }
+      });
+      {% endif %}
+  });
+</script>
+
+      
+{% schema %}
+  {
+    "name": "Enable Security",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Enable Security Checkbox"
+      },
+      {
+        "type": "checkbox",
+        "id": "selection",
+        "label": "Disable Selection"
+      },
+      {
+        "type": "checkbox",
+        "id": "rightClick",
+        "label": "Disable Right Click"
+      },
+      {
+        "type": "checkbox",
+        "id": "printer",
+        "label": "Disable Printing (ctrl + P)"
+      },
+      {
+        "type": "checkbox",
+        "id": "saving",
+        "label": "Disable Saving (ctrl + S)"
+      },
+      {
+        "type": "checkbox",
+        "id": "src_code",
+        "label": "Disable Source Code (ctrl + U)"
+      },
+      {
+        "type": "checkbox",
+        "id": "developer_tool",
+        "label": "Disable Developer tool",
+        "info": "(ctrl + shift + C, ctrl + shift + J, ctrl + shift + I, F12)"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Enable Security"
+      }
+    ]
+  }
+{% endschema %}
