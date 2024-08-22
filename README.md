@@ -2,7 +2,7 @@
 
 # Github commands
 
-git init --initia-branch=main
+git init --initial-branch=main
 
 git remote add origin <your git link>
 
